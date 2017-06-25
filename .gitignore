@@ -1,0 +1,6 @@
+/related
+/references/github
+*.idea
+*.DS_Store
+*.pyc
+*.vscode
