@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 import logging.config
 
@@ -71,17 +73,21 @@ LOGGING = {
         'mongo': {
             'handlers':['file'],
             'propagate': True,
-            'level':'ERROR',
+            'level':'DEBUG',
         },
         'mysql': {
+            # 使用database的handler
             'handlers': ['database'],
+            # log 的级别为 DEBUG
             'level': 'DEBUG',
+            # 是否要把log继续传递给更高级别（ancestor）的logger
             'propagate': False,
         },
         'redis': {
-            'handlers': ['console', 'database'],
+            'handlers': ['file', 'database'],
             'level': 'INFO',
-            'filters': ['basic']
+            'filters': ['basic'],
+            'propagate': False,
         }
     },
     'root': {
@@ -92,4 +98,4 @@ LOGGING = {
 
 if __name__ == '__main__':
     logging.config.dictConfig(LOGGING)
-    logging.getLogger('mysql').debug('Simple Log Test!')
+    logging.getLogger('redis').debug('Simple Log Test!')
